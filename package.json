@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/superpingu/SunFlower/issues"
   },
-  "homepage": "https://github.com/superpingu/SunFlower#readme"
+  "homepage": "https://github.com/superpingu/SunFlower#readme",
+  "dependencies": {
+    "@superpingu/walkinglib": "^0.1.1"
+  }
 }
