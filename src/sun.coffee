@@ -19,10 +19,18 @@ sunTime = (longitude) ->
 module.exports = (latitude, longitude) ->
     lat = latitude*2*Math.PI/360
     return ->
-        Ah = 2*Math.PI*(sunTime(longitude) - 12)/24 #hour angle
+        Ah = 2*Math.PI*(sunTime(longitude) - 12)/24 # hour angle
         dec = 2*Math.PI*23.45*Math.sin(2*Math.PI*(getDay()+284)/365)/360 #current declinaison
 
         zenith = Math.asin(Math.sin(lat)*Math.sin(dec) + Math.cos(lat)*Math.cos(dec)*Math.cos(Ah))
         azimut = Math.asin(Math.cos(dec)*Math.sin(Ah)/Math.cos(zenith))
+
+        # during a day, azimut should increase, azimut2 should be greater than azimut
+        Ah += 0.001
+        zenith2 = Math.asin(Math.sin(lat)*Math.sin(dec) + Math.cos(lat)*Math.cos(dec)*Math.cos(Ah))
+        azimut2 = Math.asin(Math.cos(dec)*Math.sin(Ah)/Math.cos(zenith))
+
+        # correct asin error if azimut is not increasing
+        azimut = Math.PI - azimut if azimut2 < azimut
 
         return zenith: zenith*180/Math.PI, azimut: azimut*180/Math.PI
