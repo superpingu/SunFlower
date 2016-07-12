@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/superpingu/SunFlower#readme",
   "dependencies": {
-    "@superpingu/walkinglib": "^0.1.1"
+    "@superpingu/walkinglib": "^0.1.1",
+    "wiring-pi": "^2.1.1"
   }
 }
